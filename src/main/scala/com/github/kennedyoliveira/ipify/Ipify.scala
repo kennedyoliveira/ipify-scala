@@ -64,7 +64,7 @@ object Ipify {
       try {
         s.close()
       } catch {
-1        case NonFatal(ex) => // suppress the non fatal exception
+        case NonFatal(ex) => // suppress the non fatal exception
       }
     }
   }
