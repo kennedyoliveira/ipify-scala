@@ -1,0 +1,24 @@
+# use Docker-based container (instead of OpenVZ)
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.m2/repository
+    - $HOME/.sbt
+    - $HOME/.ivy2
+
+language: scala
+
+script:
+  # Cross build and test
+  - sbt +clean +test
+
+  # Test again for coverage support
+  - sbt clean coverage test coverageReport
+
+after_success:
+  # Send coverage report to codacy
+  - sbt coverageAggregate codacyCoverage
+
+jdk:
+  - oraclejdk8
