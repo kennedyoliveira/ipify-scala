@@ -17,9 +17,6 @@ script:
   - sbt clean coverage test coverageReport
 
 after_success:
-  # Send coverage report to codecov
-  - bash <(curl -s https://codecov.io/bash)
-
   # Send coverage report to codacy
   - sbt coverageAggregate codacyCoverage
 
