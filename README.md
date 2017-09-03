@@ -1,1 +1,2 @@
-ipify-scala
+# ipify-scala
+Client library for ipify
