@@ -8,17 +8,20 @@ cache:
     - $HOME/.ivy2
 
 language: scala
-scala:
-   - 2.11.11
-   - 2.12.3
 
 script:
-  - sbt ++$TRAVIS_SCALA_VERSION clean coverage test coverageReport
-  - sbt coverageAggregate codacyCoverage
+  # Cross build and test
+  - sbt +clean +test
+
+  # Test again for coverage support
+  - sbt clean coverage test coverageReport
 
 after_success:
+  # Send coverage report to codecov
   - bash <(curl -s https://codecov.io/bash)
+
+  # Send coverage report to codacy
+  - sbt coverageAggregate codacyCoverage
 
 jdk:
   - oraclejdk8
-  - openjdk8
